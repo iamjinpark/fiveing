@@ -1,0 +1,11 @@
+body {
+  width: 100%;
+  min-width: 360px;
+  height: fit-content;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  background-color: #f5f4f0;
+  font-family: pretendard;
+}
