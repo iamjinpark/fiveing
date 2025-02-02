@@ -11,7 +11,7 @@ function Reference() {
           <img
             src={reference1}
             alt="뒹굴신"
-            className="w-[60px] h-[60px] border-3 border-tomato rounded-lg"
+            className="w-[60px] h-[60px] border-3 border-[#AC0000] rounded-lg"
           />
           <div className="text-sm text-tomato flex flex-col">
             <div className="font-semibold">뒹굴신</div>
@@ -24,7 +24,7 @@ function Reference() {
           <img
             src={reference2}
             alt="라이브아카데미"
-            className="w-[60px] h-[60px] border-3 border-tomato rounded-lg"
+            className="w-[60px] h-[60px] border-3 border-[#AC0000] rounded-lg"
           />
           <div className="text-sm text-tomato flex flex-col">
             <div className="font-semibold">라이브아카데미 토들러</div>

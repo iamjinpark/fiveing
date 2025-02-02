@@ -12,9 +12,9 @@ function CustomButton({
     tomato: "bg-tomato text-beige hover:bg-dark-tomato",
     beige: "bg-beige text-tomato hover:bg-dark-tomato hover:text-beige",
     outline:
-      "bg-beige text-tomato border-tomato border-2 hover:bg-dark-tomato hover:text-beige",
+      "bg-beige text-tomato border-[#AC0000] border-2 hover:bg-dark-tomato hover:text-beige",
     white:
-      "bg-white text-tomato border-tomato border-2 hover:bg-dark-tomato hover:text-white", // 모달용
+      "bg-white text-tomato border-[#AC0000] border-2 hover:bg-dark-tomato hover:text-white", // 모달용
   };
 
   const sizeStyles = {

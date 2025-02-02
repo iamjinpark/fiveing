@@ -16,7 +16,7 @@ function CardContainer() {
       {/* 제목 & 버튼 영역 */}
       <div className="w-[320px] flex flex-row justify-between">
         <h2 className="text-tomato text-2xl font-bold">today's fiveing</h2>
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-5">
           <button onClick={() => setType("card")}>
             <img
               src={type === "card" ? cardIcon : cardIcon_unselected}
