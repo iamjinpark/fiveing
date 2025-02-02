@@ -1,0 +1,16 @@
+{
+    "name": "fiveing",
+    "short_name": "fiveing",
+    "description": "파이빙은 매일 영어 5문장씩 추천해드려요. 작은 문장들이 모여 영어로 말할 수 있는 그날까지 파이빙!",
+    "start_url": "/home",
+    "display": "standalone",
+    "background_color": "#f5f4f0",
+    "theme_color": "#ac0000",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "192x192",
+            "type": "image/svg"
+        }
+    ]
+}
