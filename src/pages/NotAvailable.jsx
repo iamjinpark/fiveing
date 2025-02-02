@@ -2,7 +2,8 @@ import notAvailable from "@/assets/notAvailable.png";
 
 function NotAvailable() {
   return (
-    <div className="w-full h-[calc(100vh-132px)] flex items-center justify-center">
+    // TODO : 높이 수정하기
+    <div className="w-full h-[calc(100vh-130px)] flex items-center justify-center">
       <div className="flex flex-col justify-center items-center gap-6">
         <div className="text-tomato text-4xl font-extrabold">NOT AVAILABLE</div>
         <img
