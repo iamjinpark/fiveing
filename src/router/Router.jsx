@@ -16,8 +16,8 @@ const router = createBrowserRouter([
   {
     element: <AuthLayout />,
     children: [
-      { path: "/", element: <Login /> },
-      { path: "sign-up", element: <SignUp /> },
+      { path: "/", element: <NotAvailable /> },
+      { path: "sign-up", element: <NotAvailable /> },
     ],
   },
   {
@@ -25,10 +25,12 @@ const router = createBrowserRouter([
     children: [
       { path: "home", element: <Home /> },
       { path: "diary", element: <NotAvailable /> },
-      { path: "make-it", element: <MakeIt /> },
-      { path: "make-it/:id", element: <MakeItDetail /> },
-      { path: "notice", element: <Notice /> },
-      { path: "notice/:id", element: <NoticeDetail /> },
+      { path: "make-it", element: <NotAvailable /> },
+      { path: "notice", element: <NotAvailable /> },
+      //   { path: "make-it", element: <MakeIt /> },
+      //   { path: "make-it/:id", element: <MakeItDetail /> },
+      //   { path: "notice", element: <Notice /> },
+      //   { path: "notice/:id", element: <NoticeDetail /> },
       { path: "quiz", element: <NotAvailable /> },
       { path: "my-page", element: <MyPage /> },
     ],
