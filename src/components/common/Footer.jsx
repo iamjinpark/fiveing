@@ -1,7 +1,11 @@
+import Navigation from "./Navigation";
+
 function Footer() {
   return (
     <>
-      <footer>footer</footer>
+      <footer className="">
+        <Navigation />
+      </footer>
     </>
   );
 }

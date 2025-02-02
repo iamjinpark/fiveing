@@ -37,11 +37,21 @@ function HeaderProfile({ image, onImageChange = () => {} }) {
   };
 
   return (
-    <div ref={dropdownRef} className="w-[35px] h-[35px] relative">
-      <input type="file" accept="image/*" ref={fileInputRef} className="hidden" onChange={handleFileChange} />
+    <div ref={dropdownRef} className="w-[40px] h-[40px] relative">
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        className="hidden"
+        onChange={handleFileChange}
+      />
 
       <button onClick={() => setIsOpen(!isOpen)}>
-        <img src={imageUrl || defaultProfile} alt="프로필" className="w-[35px] h-[35px] cursor-pointer object-cover" />
+        <img
+          src={imageUrl || defaultProfile}
+          alt="프로필"
+          className="w-[40px] h-[40px] cursor-pointer object-cover rounded-full"
+        />
       </button>
 
       {isOpen && (

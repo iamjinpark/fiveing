@@ -1,7 +1,15 @@
+import Greeting from "../../components/profile/Greeting";
+import CardContainer from "../../components/card/CardContainer";
+import LevelUp from "../../components/card/LevelUp";
+import Reference from "../../components/card/Reference";
+
 function Home() {
   return (
     <>
-      <div>홈</div>
+      <Greeting />
+      <CardContainer />
+      <LevelUp />
+      <Reference />
     </>
   );
 }
