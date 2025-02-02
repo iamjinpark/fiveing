@@ -3,7 +3,7 @@ import cardIcon from "@/assets/cardIcon.svg";
 import listIcon from "@/assets/listIcon.svg";
 import cardIcon_unselected from "@/assets/cardIcon_unselected.svg";
 import listIcon_unselected from "@/assets/listIcon_unselected.svg";
-import DateSlider from "./dateSlider";
+import DateSlider from "./DateSlider";
 import CardType from "./CardType";
 import ListType from "./ListType";
 
