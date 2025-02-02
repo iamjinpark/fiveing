@@ -10,9 +10,18 @@ function HeaderProfile({ image, onImageChange = () => {} }) {
   const navigate = useNavigate();
 
   const menuItems = [
-    { label: "profile", onClick: () => fileInputRef.current.click() },
-    { label: "my page", onClick: () => navigate("/my-page") },
-    { label: "logout", onClick: () => alert("로그아웃") }, // TODO : pb 연동 후 로그아웃 기능 구현
+    {
+      label: "profile",
+      onClick: () => handleMenuClick(() => fileInputRef.current.click()),
+    },
+    {
+      label: "my page",
+      onClick: () => handleMenuClick(() => navigate("/my-page")),
+    },
+    {
+      label: "logout",
+      onClick: () => handleMenuClick(() => alert("로그아웃")),
+    }, // TODO : pb 연동 후 로그아웃 기능 구현
   ];
 
   // 드롭다운 외부 클릭으로 닫기
@@ -26,6 +35,12 @@ function HeaderProfile({ image, onImageChange = () => {} }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // 메뉴 클릭 후 드롭다운 닫기
+  const handleMenuClick = (callback) => {
+    setIsOpen(false);
+    if (callback) callback();
+  };
+
   // 프로필 사진 변경
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -33,6 +48,7 @@ function HeaderProfile({ image, onImageChange = () => {} }) {
       const imageUrl = URL.createObjectURL(file);
       onImageChange(imageUrl);
       setImageUrl(imageUrl);
+      setIsOpen(false);
     }
   };
 
