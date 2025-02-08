@@ -37,7 +37,7 @@ function CardContainer() {
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
       />
-      <div className="w-[340px] min-h-[240px] bg-peach rounded-2xl drop-shadow-md py-5">
+      <div className="w-[350px] min-h-[240px] bg-peach rounded-2xl drop-shadow-md py-5 px-5">
         {type === "card" ? (
           <CardType date={selectedDate} />
         ) : (
