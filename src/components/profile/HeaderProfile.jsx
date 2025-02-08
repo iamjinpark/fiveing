@@ -71,7 +71,7 @@ function HeaderProfile({ image, onImageChange = () => {} }) {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 w-[100px] bg-white rounded-lg py-2 z-50 border-2 border-[#AC0000]">
+        <div className="absolute right-0 w-[100px] bg-white rounded-lg py-2 z-50 border-2 !border-tomato">
           {menuItems.map((item, index) => (
             <button
               key={index}
