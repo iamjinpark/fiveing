@@ -37,9 +37,14 @@ function CardContainer() {
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
       />
-      <div className="w-[350px] min-h-[240px] bg-peach rounded-2xl drop-shadow-md py-5 px-5">
+      <div
+        className="w-[350px] bg-peach rounded-2xl drop-shadow-md py-5 px-5 h-auto flex flex-col"
+        style={{ height: "auto" }}
+      >
         {type === "card" ? (
-          <CardType date={selectedDate} />
+          <div className="w-full h-auto">
+            <CardType date={selectedDate} />
+          </div>
         ) : (
           <ListType date={selectedDate} />
         )}
