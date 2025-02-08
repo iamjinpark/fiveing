@@ -33,13 +33,13 @@ function CardType({ data }) {
           }}
         >
           <div
-            className={`relative w-[260px] rounded-2xl flex flex-col gap-4 justify-center items-center text-center break-words 
+            className={`p-4 relative w-[260px] rounded-2xl flex flex-col gap-6 justify-center items-center text-center break-words 
               ${index % 2 === 0 ? "bg-tomato text-beige" : "bg-beige text-tomato"}
             `}
             style={{ minHeight: "200px", height: "auto" }}
           >
-            <p className="text-lg font-bold px-3 pt-5">{item.kor}</p>
-            <p className="text-md px-3 pb-5">{item.eng}</p>
+            <p className="text-xl font-bold">{item.kor}</p>
+            <p className="text-md ">{item.eng}</p>
           </div>
         </SwiperSlide>
       ))}

@@ -65,7 +65,7 @@ function CardContainer() {
         setSelectedDate={setSelectedDate}
       />
       <div
-        className="w-[350px] bg-peach rounded-2xl drop-shadow-md py-5 px-5 h-auto flex flex-col"
+        className="w-[350px] bg-peach rounded-2xl drop-shadow-md py-7 px-5 h-auto flex flex-col"
         style={{ height: "auto" }}
       >
         {type === "card" ? (

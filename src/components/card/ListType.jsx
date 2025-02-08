@@ -1,6 +1,6 @@
 function ListType({ data }) {
   return (
-    <div className="w-full h-auto flex flex-col gap-3 pt-4">
+    <div className="w-full h-auto flex flex-col gap-5">
       {data.map((item, index) => (
         <div
           key={item.id}
@@ -8,7 +8,7 @@ function ListType({ data }) {
               ${index % 2 === 0 ? "bg-tomato text-white" : "bg-beige text-tomato"}
             `}
         >
-          <p className="text-lg font-bold">{item.eng}</p>
+          <p className="text-xl font-bold">{item.eng}</p>
           <p className="text-md">{item.kor}</p>
         </div>
       ))}
