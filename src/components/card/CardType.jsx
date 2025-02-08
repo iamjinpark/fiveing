@@ -36,7 +36,7 @@ function CardType({ data }) {
             className={`p-4 relative w-[260px] rounded-2xl flex flex-col gap-6 justify-center items-center text-center break-words 
               ${index % 2 === 0 ? "bg-tomato text-beige" : "bg-beige text-tomato"}
             `}
-            style={{ minHeight: "200px", height: "auto" }}
+            style={{ minHeight: "190px", height: "auto" }}
           >
             <p className="text-xl font-bold">{item.kor}</p>
             <p className="text-md ">{item.eng}</p>

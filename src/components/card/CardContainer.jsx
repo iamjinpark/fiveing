@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cardIcon from "@/assets/cardIcon.svg";
 import listIcon from "@/assets/listIcon.svg";
 import cardIcon_unselected from "@/assets/cardIcon_unselected.svg";
@@ -6,37 +6,46 @@ import listIcon_unselected from "@/assets/listIcon_unselected.svg";
 import DateSlider from "./DateSlider";
 import CardType from "./CardType";
 import ListType from "./ListType";
+import pb from "@/api/pocketbase.js";
 
 function CardContainer() {
   const [type, setType] = useState("card");
-  const [selectedDate, setSelectedDate] = useState(new Date().getDate());
-  const listMockData = [
-    {
-      id: 1,
-      kor: "오늘의 할 일: 아침 스트레칭 10분",
-      eng: "Today's task: 10-minute morning stretching",
-    },
-    {
-      id: 2,
-      kor: "책 읽기: 하루 30분 독서로 지식 쌓기",
-      eng: "Reading time: 30 minutes a day to build knowledge",
-    },
-    {
-      id: 3,
-      kor: "프로그래밍 연습: 알고리즘 문제 3개 풀기",
-      eng: "Programming practice: Solve 3 algorithm problems",
-    },
-    {
-      id: 4,
-      kor: "건강 챙기기: 물 2L 마시기와 가벼운 산책",
-      eng: "Stay healthy: Drink 2L of water and take a short walk",
-    },
-    {
-      id: 5,
-      kor: "자기 성장: 오늘의 하루를 회고하며 짧은 글 작성",
-      eng: "Self-growth: Write a short reflection on your day",
-    },
-  ];
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().toLocaleDateString("sv-SE")
+  ); // YYYY-MM-DD
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const startOfDay = `${selectedDate} 00:00:00`;
+        const endOfDay = `${selectedDate} 23:59:59`;
+
+        const records = await pb.collection("fiveing").getList(1, 5, {
+          filter: `date >= '${startOfDay}' && date <= '${endOfDay}'`,
+          sort: "created",
+        });
+
+        setData(records.items);
+      } catch (err) {
+        console.error("데이터를 불러오는 중 오류 발생:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [selectedDate]);
+
+  if (loading) return <p>Loading...</p>; // TODO : 로딩 컴포넌트
+  if (error) return <p>Error: {error}</p>; // TODO : 에러 컴포넌트
 
   return (
     <div className="w-full flex flex-col items-center pt-5">
@@ -70,10 +79,10 @@ function CardContainer() {
       >
         {type === "card" ? (
           <div className="w-full h-auto">
-            <CardType date={selectedDate} data={listMockData} />
+            <CardType date={selectedDate} data={data} />
           </div>
         ) : (
-          <ListType date={selectedDate} data={listMockData} />
+          <ListType date={selectedDate} data={data} type="fiveing" />
         )}
       </div>
     </div>

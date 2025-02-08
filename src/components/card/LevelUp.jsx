@@ -1,42 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomButton from "@/components/common/CustomButton";
 import ListType from "./ListType";
+import pb from "@/api/pocketbase.js";
 
 function LevelUp() {
   const [isLevelUp, setLevelUp] = useState(false);
 
+  const [data, setData] = useState([]); // ✅ 서버에서 받아온 데이터
+  const [loading, setLoading] = useState(false); // ✅ 로딩 상태
+  const [error, setError] = useState(null); // ✅ 에러 상태
+
+  useEffect(() => {
+    if (!isLevelUp) return; // ✅ 레벨업 버튼을 눌렀을 때만 데이터 로드
+
+    async function fetchLevelUpData() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const records = await pb.collection("levelup").getList(1, 5, {
+          sort: "created",
+        });
+
+        setData(records.items);
+      } catch (err) {
+        console.error("🚨 데이터 불러오기 오류:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchLevelUpData();
+  }, [isLevelUp]); // ✅ isLevelUp 변경될 때마다 실행
+
   const toggleLevelUpButton = () => {
     setLevelUp((prev) => !prev);
   };
-
-  // ✅ 서버에서 받아온 데이터
-  const levelUpMockData = [
-    {
-      id: 1,
-      kor: "레벨업 첫 번째 단계: 꾸준함이 중요합니다!",
-      eng: "Level up step 1: Consistency is key!",
-    },
-    {
-      id: 2,
-      kor: "지금까지 배운 내용을 복습하고, 새로운 목표를 설정하세요.",
-      eng: "Review what you've learned and set new goals.",
-    },
-    {
-      id: 3,
-      kor: "더 깊이 있는 학습을 위해 관련 자료를 찾아보세요.",
-      eng: "Look for additional resources for deeper learning.",
-    },
-    {
-      id: 4,
-      kor: "실제 프로젝트에 적용해 보면서 경험을 쌓아 보세요!",
-      eng: "Apply what you've learned to real projects and gain experience!",
-    },
-    {
-      id: 5,
-      kor: "마지막 단계! 도전을 멈추지 말고 계속 성장하세요.",
-      eng: "Final step! Keep challenging yourself and continue to grow.",
-    },
-  ];
 
   return (
     <div className="w-full flex flex-col items-center p-7">
@@ -54,8 +54,7 @@ function LevelUp() {
           <div className="text-tomato text-2xl font-bold self-start pb-4">
             level up
           </div>
-          {/* levelup card container */}
-          <ListType data={levelUpMockData} />
+          <ListType data={data} type="levelup" />
         </div>
       )}
     </div>
