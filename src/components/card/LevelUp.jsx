@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CustomButton from "@/components/common/CustomButton";
+import ListType from "./ListType";
 
 function LevelUp() {
   const [isLevelUp, setLevelUp] = useState(false);
@@ -9,11 +10,32 @@ function LevelUp() {
   };
 
   // ✅ 서버에서 받아온 데이터
-  const mockData = [
-    { id: 1, text: "첫 번째 박스" },
-    { id: 2, text: "두 번째 박스" },
-    { id: 3, text: "세 번째 박스" },
-    { id: 4, text: "네 번째 박스" },
+  const levelUpMockData = [
+    {
+      id: 1,
+      kor: "레벨업 첫 번째 단계: 꾸준함이 중요합니다!",
+      eng: "Level up step 1: Consistency is key!",
+    },
+    {
+      id: 2,
+      kor: "지금까지 배운 내용을 복습하고, 새로운 목표를 설정하세요.",
+      eng: "Review what you've learned and set new goals.",
+    },
+    {
+      id: 3,
+      kor: "더 깊이 있는 학습을 위해 관련 자료를 찾아보세요.",
+      eng: "Look for additional resources for deeper learning.",
+    },
+    {
+      id: 4,
+      kor: "실제 프로젝트에 적용해 보면서 경험을 쌓아 보세요!",
+      eng: "Apply what you've learned to real projects and gain experience!",
+    },
+    {
+      id: 5,
+      kor: "마지막 단계! 도전을 멈추지 말고 계속 성장하세요.",
+      eng: "Final step! Keep challenging yourself and continue to grow.",
+    },
   ];
 
   return (
@@ -33,20 +55,7 @@ function LevelUp() {
             level up
           </div>
           {/* levelup card container */}
-          <div className="w-full flex flex-col gap-3 pt-4">
-            {mockData.map((item, index) => (
-              <div
-                key={item.id}
-                className={`p-4 rounded-lg text-center font-semibold ${
-                  index % 2 === 0
-                    ? "bg-beige text-tomato"
-                    : "bg-tomato text-white"
-                }`}
-              >
-                {item.text}
-              </div>
-            ))}
-          </div>
+          <ListType data={levelUpMockData} />
         </div>
       )}
     </div>
