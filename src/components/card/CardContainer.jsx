@@ -44,9 +44,6 @@ function CardContainer() {
     fetchData();
   }, [selectedDate]);
 
-  if (loading) return <p>Loading...</p>; // TODO : 로딩 컴포넌트
-  if (error) return <p>Error: {error}</p>; // TODO : 에러 컴포넌트
-
   return (
     <div className="w-full flex flex-col items-center pt-5">
       {/* 제목 & 버튼 영역 */}
@@ -79,10 +76,15 @@ function CardContainer() {
       >
         {type === "card" ? (
           <div className="w-full h-auto">
-            <CardType date={selectedDate} data={data} />
+            <CardType date={selectedDate} data={data} loading={loading} />
           </div>
         ) : (
-          <ListType date={selectedDate} data={data} type="fiveing" />
+          <ListType
+            date={selectedDate}
+            data={data}
+            type="fiveing"
+            loading={loading}
+          />
         )}
       </div>
     </div>
