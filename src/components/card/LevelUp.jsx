@@ -6,12 +6,12 @@ import pb from "@/api/pocketbase.js";
 function LevelUp() {
   const [isLevelUp, setLevelUp] = useState(false);
 
-  const [data, setData] = useState([]); // ✅ 서버에서 받아온 데이터
-  const [loading, setLoading] = useState(false); // ✅ 로딩 상태
-  const [error, setError] = useState(null); // ✅ 에러 상태
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!isLevelUp) return; // ✅ 레벨업 버튼을 눌렀을 때만 데이터 로드
+    if (!isLevelUp) return;
 
     async function fetchLevelUpData() {
       try {
@@ -32,7 +32,7 @@ function LevelUp() {
     }
 
     fetchLevelUpData();
-  }, [isLevelUp]); // ✅ isLevelUp 변경될 때마다 실행
+  }, [isLevelUp]); 
 
   const toggleLevelUpButton = () => {
     setLevelUp((prev) => !prev);

@@ -38,8 +38,8 @@ function CardType({ data }) {
             `}
             style={{ minHeight: "190px", height: "auto" }}
           >
-            <p className="text-xl font-bold">{item.kor}</p>
-            <p className="text-md ">{item.eng}</p>
+            <p className="text-xl font-bold">{item.eng}</p>
+            <p className="text-md">{item.kor}</p>
           </div>
         </SwiperSlide>
       ))}
