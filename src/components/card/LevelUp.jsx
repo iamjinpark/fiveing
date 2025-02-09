@@ -5,9 +5,12 @@ import pb from "@/api/pocketbase.js";
 
 function LevelUp() {
   const [isLevelUp, setLevelUp] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().toLocaleDateString("sv-SE")
+  ); // YYYY-MM-DD
 
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -18,7 +21,11 @@ function LevelUp() {
         setLoading(true);
         setError(null);
 
-        const records = await pb.collection("levelup").getList(1, 5, {
+        const startOfDay = `${selectedDate} 00:00:00`;
+        const endOfDay = `${selectedDate} 23:59:59`;
+
+        const records = await pb.collection("levelup").getList(1, 1, {
+          filter: `date >= '${startOfDay}' && date <= '${endOfDay}'`,
           sort: "created",
         });
 
@@ -32,7 +39,7 @@ function LevelUp() {
     }
 
     fetchLevelUpData();
-  }, [isLevelUp]); 
+  }, [isLevelUp]);
 
   const toggleLevelUpButton = () => {
     setLevelUp((prev) => !prev);
@@ -54,7 +61,7 @@ function LevelUp() {
           <div className="text-tomato text-2xl font-bold self-start pb-4">
             level up
           </div>
-          <ListType data={data} type="levelup" />
+          <ListType data={data} type="levelup" loading={loading} />
         </div>
       )}
     </div>

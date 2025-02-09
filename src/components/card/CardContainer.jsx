@@ -74,6 +74,13 @@ function CardContainer() {
         className="w-[350px] bg-peach rounded-2xl drop-shadow-md py-7 px-5 h-auto flex flex-col"
         style={{ height: "auto" }}
       >
+        {/* ✅ 데이터가 없는 경우 '준비 중' 표시 */}
+        {!loading && !error && data.length === 0 && (
+          <p className="text-tomato text-lg font-bold text-center">
+            {selectedDate.split("-")[2]}일의 파이빙을 기다려주세요!
+          </p>
+        )}
+
         {type === "card" ? (
           <div className="w-full h-auto">
             <CardType date={selectedDate} data={data} loading={loading} />
