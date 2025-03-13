@@ -27,21 +27,25 @@ function CardContainer() {
         const startOfDay = `${selectedDate} 00:00:00`;
         const endOfDay = `${selectedDate} 23:59:59`;
 
-        const records = await pb.collection("fiveing").getList(1, 5, {
-          filter: `date >= '${startOfDay}' && date <= '${endOfDay}'`,
-          sort: "created",
-        });
+        const record = await pb
+          .collection("fiveingList")
+          .getFirstListItem(`date >= '${startOfDay}' && date <= '${endOfDay}'`);
 
-        setData(records.items);
+        setData(record.fiveingList);
       } catch (err) {
-        console.error("데이터를 불러오는 중 오류 발생:", err);
-        setError(err.message);
+        if (err.status === 404) {
+          setData([]);
+          setError(null);
+        } else {
+          setError(err.message);
+        }
       } finally {
         setLoading(false);
       }
     }
 
     fetchData();
+    console.log("현재 선택된 날짜:", selectedDate);
   }, [selectedDate]);
 
   return (
@@ -75,7 +79,7 @@ function CardContainer() {
         style={{ height: "auto" }}
       >
         {/* ✅ 데이터가 없는 경우 '준비 중' 표시 */}
-        {!loading && !error && data.length === 0 && (
+        {!loading && !error && data?.length === 0 && (
           <p className="text-tomato text-lg font-bold text-center">
             {selectedDate.split("-")[2]}일의 파이빙을 기다려주세요!
           </p>
