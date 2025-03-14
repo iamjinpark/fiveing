@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import AuthLayout from "@/components/layout/AuthLayout";
 import Login from "@/pages/Auth/Login";
-import SignUp from "@/pages/Auth/SignUp";
+import KakaoRedirect from "../pages/Auth/KakaoRedirect";
 import Home from "@/pages/Home/Home";
 import MakeIt from "@/pages/MakeIt/MakeIt";
 import MakeItDetail from "@/pages/MakeIt/MakeItDetail";
@@ -16,8 +16,11 @@ const router = createBrowserRouter([
   {
     element: <AuthLayout />,
     children: [
-      { path: "/", element: <NotAvailable /> },
-      { path: "sign-up", element: <NotAvailable /> },
+      { path: "/login", element: <Login /> },
+      {
+        path: "/login/oauth2/code/kakao",
+        element: <KakaoRedirect />,
+      },
     ],
   },
   {
