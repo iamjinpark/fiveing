@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/login", element: <Login /> },
       {
-        path: "/login/oauth2/code/kakao",
+        path: "/api/oauth2-redirect",
         element: <KakaoRedirect />,
       },
     ],

@@ -1,46 +1,38 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  getKakaoToken,
-  getKakaoUser,
-  loginOrRegisterKakaoUser,
-} from "@/utils/kakaoAuth";
+import pb from "@/api/pocketbase.js";
 
 function KakaoRedirect() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleKakaoLogin = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get("code");
+    const loginWithKakao = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code"); // OAuth2 인가 코드 받기
+
+      console.log(code);
 
       if (!code) {
-        console.error("카카오 로그인 코드 없음");
+        console.error("OAuth2 인가 코드가 없습니다.");
+        navigate("/login");
         return;
       }
 
       try {
-        // ✅ 1. 카카오 액세스 토큰 요청
-        const accessToken = await getKakaoToken(code);
-        console.log("카카오 액세스 토큰:", accessToken);
+        const authData = await pb
+          .collection("users")
+          .authWithOAuth2({ provider: "kakao" });
 
-        // ✅ 2. 카카오 사용자 정보 요청
-        const userInfo = await getKakaoUser(accessToken);
-        console.log("카카오 사용자 정보:", userInfo);
-
-        // ✅ 3. PocketBase 로그인 또는 회원가입 처리
-        const authData = await loginOrRegisterKakaoUser(userInfo);
         console.log("PocketBase 로그인 성공:", authData);
-
-        // ✅ 4. 로그인 성공 후 이동
-        navigate("/home");
+        navigate("/home"); // 로그인 성공 후 메인 페이지로 이동
       } catch (error) {
-        console.error("카카오 로그인 실패:", error);
+        console.error("PocketBase 로그인 실패:", error);
+        navigate("/login");
       }
     };
 
-    handleKakaoLogin();
-  }, []);
+    loginWithKakao();
+  }, [navigate]);
 
   return <div>로그인 중...</div>;
 }
