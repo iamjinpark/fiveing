@@ -24,6 +24,7 @@ function KakaoRedirect() {
           .authWithOAuth2({ provider: "kakao" });
 
         console.log("PocketBase 로그인 성공:", authData);
+
         navigate("/home"); // 로그인 성공 후 메인 페이지로 이동
       } catch (error) {
         console.error("PocketBase 로그인 실패:", error);
