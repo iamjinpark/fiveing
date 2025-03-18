@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import defaultProfile from "@/assets/profile.svg";
+import pb from "@/api/pocketbase.js";
 
 function HeaderProfile({ image, onImageChange = () => {} }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,7 @@ function HeaderProfile({ image, onImageChange = () => {} }) {
     },
     {
       label: "logout",
-      onClick: () => handleMenuClick(() => alert("로그아웃")),
+      onClick: () => handleLogout(),
     }, // TODO : pb 연동 후 로그아웃 기능 구현
   ];
 
@@ -50,6 +51,11 @@ function HeaderProfile({ image, onImageChange = () => {} }) {
       setImageUrl(imageUrl);
       setIsOpen(false);
     }
+  };
+
+  const handleLogout = async () => {
+    await pb.authStore.clear();
+    navigate("/login");
   };
 
   return (

@@ -15,35 +15,34 @@ import NoticeDetail from "@/pages/Notice/NoticeDetail";
 import MyPage from "@/pages/MyPage/MyPage";
 import NotFound from "@/pages/NotFound";
 import NotAvailable from "@/pages/NotAvailable";
+import RouterGuard from "@/router/RouterGuard"; // ✅ 라우터 가드 추가
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navigate to="/login" replace />,
+    element: <Navigate to="/login" replace />, // 기본 경로에서 `/login`으로 리디렉션
   },
   {
     element: <AuthLayout />,
     children: [
       { path: "/login", element: <Login /> },
-      {
-        path: "/api/oauth2-redirect",
-        element: <KakaoRedirect />,
-      },
+      { path: "/api/oauth2-redirect", element: <KakaoRedirect /> },
     ],
   },
   {
-    element: <Layout />,
+    element: <RouterGuard />, // ✅ 로그인된 사용자만 Layout 사용 가능
     children: [
-      { path: "home", element: <Home /> },
-      { path: "diary", element: <NotAvailable /> },
-      { path: "make-it", element: <NotAvailable /> },
-      { path: "notice", element: <NotAvailable /> },
-      //   { path: "make-it", element: <MakeIt /> },
-      //   { path: "make-it/:id", element: <MakeItDetail /> },
-      //   { path: "notice", element: <Notice /> },
-      //   { path: "notice/:id", element: <NoticeDetail /> },
-      { path: "quiz", element: <NotAvailable /> },
-      { path: "my-page", element: <MyPage /> },
+      {
+        element: <Layout />,
+        children: [
+          { path: "home", element: <Home /> },
+          { path: "diary", element: <NotAvailable /> },
+          { path: "make-it", element: <NotAvailable /> },
+          { path: "notice", element: <NotAvailable /> },
+          { path: "quiz", element: <NotAvailable /> },
+          { path: "my-page", element: <MyPage /> },
+        ],
+      },
     ],
   },
   {
