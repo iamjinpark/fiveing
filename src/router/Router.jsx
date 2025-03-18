@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import AuthLayout from "@/components/layout/AuthLayout";
 import Login from "@/pages/Auth/Login";
@@ -13,6 +17,10 @@ import NotFound from "@/pages/NotFound";
 import NotAvailable from "@/pages/NotAvailable";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navigate to="/login" replace />,
+  },
   {
     element: <AuthLayout />,
     children: [
