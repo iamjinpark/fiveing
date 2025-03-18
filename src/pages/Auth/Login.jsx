@@ -4,7 +4,8 @@ import CustomButton from "@/components/common/CustomButton";
 
 function Login() {
   function goToKakaoAuth() {
-    window.location.href = import.meta.env.VITE_KAKAO_AUTH_API;
+    // window.location.href = import.meta.env.VITE_KAKAO_AUTH_API;
+    window.location.href = "/api/oauth2-redirect";
   }
 
   return (

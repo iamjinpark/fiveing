@@ -7,16 +7,16 @@ function KakaoRedirect() {
 
   useEffect(() => {
     const loginWithKakao = async () => {
-      const params = new URLSearchParams(window.location.search);
-      const code = params.get("code"); // OAuth2 인가 코드 받기
+      //   const params = new URLSearchParams(window.location.search);
+      //   const code = params.get("code"); // OAuth2 인가 코드 받기
 
-      console.log(code);
+      //   console.log(code);
 
-      if (!code) {
-        console.error("OAuth2 인가 코드가 없습니다.");
-        navigate("/login");
-        return;
-      }
+      //   if (!code) {
+      //     console.error("OAuth2 인가 코드가 없습니다.");
+      //     navigate("/login");
+      //     return;
+      //   }
 
       try {
         const authData = await pb
@@ -25,7 +25,7 @@ function KakaoRedirect() {
 
         console.log("PocketBase 로그인 성공:", authData);
 
-        navigate("/home"); // 로그인 성공 후 메인 페이지로 이동
+        navigate("/home");
       } catch (error) {
         console.error("PocketBase 로그인 실패:", error);
         navigate("/login");
