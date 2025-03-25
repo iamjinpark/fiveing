@@ -32,7 +32,7 @@ function Login() {
       );
 
       // ✅ 카카오 OAuth2 로그인 URL로 이동
-      //   window.location.href = loginUrl;
+      window.location.href = loginUrl;
     } catch (err) {
       console.error("OAuth2 로그인 시작 실패:", err);
     }
