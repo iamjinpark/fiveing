@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import pb from "@/api/pocketbase";
+import LoadingSpinner from "@/components/common/loadingSpinner";
 
 function KakaoRedirect() {
   const navigate = useNavigate();
@@ -52,7 +53,17 @@ function KakaoRedirect() {
     loginWithKakao();
   }, [navigate]);
 
-  return <div>로그인 처리 중...</div>;
+  return (
+    <div className="flex flex-col items-center justify-center gap-[60px]">
+      <span className="text-tomato font-extrabold text-2xl">
+        파이빙을 카카오톡에 연동중
+      </span>
+      <LoadingSpinner />
+      <span className="text-tomato font-extrabold text-xl">
+        잠시만 기다려 주세요!
+      </span>
+    </div>
+  );
 }
 
 export default KakaoRedirect;

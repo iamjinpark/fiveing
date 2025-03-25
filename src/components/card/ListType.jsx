@@ -1,11 +1,14 @@
 import { ClipLoader } from "react-spinners"; // ✅ react-spinners 추가
+import LoadingSpinner from "@/components/common/loadingSpinner";
 
 function ListType({ data, type, loading }) {
   return (
     <div className="w-full h-auto flex flex-col gap-5">
       {loading ? (
         <div className="flex justify-center items-center h-32">
-          <ClipLoader color="#AC0000" size={50} />
+          {/* <ClipLoader color="#AC0000" size={50} />
+           */}
+          <LoadingSpinner />
         </div>
       ) : (
         data.map((item, index) => (

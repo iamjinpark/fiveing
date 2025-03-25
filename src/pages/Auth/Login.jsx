@@ -38,7 +38,7 @@ function Login() {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center gap-[60px]">
+    <div className="flex flex-col items-center justify-center gap-[100px]">
       <img src={mainImg} alt="" className="w-[300px] h-[400px]" />
       <CustomButton onClick={startOAuth2Login}>Start with KAKAO</CustomButton>
     </div>

@@ -3,13 +3,15 @@ import { EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import { ClipLoader } from "react-spinners"; // ✅ react-spinners 추가
+import LoadingSpinner from "@/components/common/loadingSpinner";
 
 function CardType({ data, loading }) {
   return (
     <div className="w-full flex justify-center items-center">
       {/* ✅ 로딩 중일 때 스피너 표시 */}
       {loading ? (
-        <ClipLoader color="#AC0000" size={50} />
+        // <ClipLoader color="#AC0000" size={50} />
+        <LoadingSpinner />
       ) : (
         <Swiper
           effect="coverflow"
