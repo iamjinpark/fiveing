@@ -11,6 +11,8 @@ function Login() {
         (p) => p.name === "kakao"
       );
 
+      console.log(kakaoAuth);
+
       if (!kakaoAuth) {
         console.error("카카오 OAuth2 제공자를 찾을 수 없습니다.");
         return;
@@ -20,10 +22,17 @@ function Login() {
       const loginUrl = `${baseUrl}&redirect_uri=${import.meta.env.VITE_KAKAO_REDIRECT_URI}`;
 
       console.log(loginUrl);
-      sessionStorage.setItem("pb_oauth2_codeVerifier", kakaoAuth.codeVerifier);
+      sessionStorage.setItem(
+        "pb_oauth2_provider",
+        JSON.stringify({
+          name: kakaoAuth.name,
+          state: kakaoAuth.state,
+          codeVerifier: kakaoAuth.codeVerifier,
+        })
+      );
 
       // ✅ 카카오 OAuth2 로그인 URL로 이동
-      window.location.href = loginUrl;
+      //   window.location.href = loginUrl;
     } catch (err) {
       console.error("OAuth2 로그인 시작 실패:", err);
     }
