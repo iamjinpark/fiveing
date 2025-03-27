@@ -42,6 +42,10 @@ function KakaoRedirect() {
           );
 
         console.log("로그인 성공", authData);
+
+        const isNewUser = authData.meta?.isNew === true;
+        sessionStorage.setItem("isNewUser", isNewUser ? "true" : "false");
+
         sessionStorage.removeItem("pb_oauth2_provider");
         navigate("/home");
       } catch (err) {
