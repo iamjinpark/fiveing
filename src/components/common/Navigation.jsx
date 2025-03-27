@@ -58,7 +58,7 @@ function Navigation() {
 
   return (
     <nav className="fixed bottom-0 min-w-[360px] bg-peach shadow-lg z-10">
-      <div className="flex justify-around items-center py-[15px]">
+      <div className="flex justify-around items-center py-[20px]">
         {navItems.map((item) => (
           <NavItem
             key={item.path}

@@ -22,7 +22,7 @@ function Home() {
       <Greeting />
       <CardContainer />
       <LevelUp />
-      <Reference />
+      {/* <Reference /> */}
     </>
   );
 }
