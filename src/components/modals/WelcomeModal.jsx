@@ -3,21 +3,30 @@ import CustomInput from "@/components/common/CustomInput";
 import CustomButton from "@/components/common/CustomButton";
 import HowToUSeFiveingLikeApp from "@/assets/HowToUSeFiveingLikeApp.png";
 import heart from "@/assets/heart.svg";
+import pb from "@/api/pocketbase.js";
 
 function WelcomeModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
   const [inputValue, setInputValue] = useState("");
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!inputValue.trim()) {
       alert("이름을 입력해주세요!");
       return;
     }
-    setStep(2);
-  };
 
-  const handleBack = () => {
-    setStep(1);
+    try {
+      const userId = pb.authStore.model.id; // 로그인된 유저의 id
+
+      await pb.collection("users").update(userId, {
+        name: inputValue,
+      });
+
+      setStep(2);
+    } catch (err) {
+      console.error("이름 업데이트 실패:", err);
+      alert("이름 저장 중 오류가 발생했어요.");
+    }
   };
 
   //   if (!isOpen) return null;
@@ -60,7 +69,7 @@ function WelcomeModal({ isOpen, onClose }) {
               src={HowToUSeFiveingLikeApp}
               alt="파이빙을 홈화면에 추가하는 방법 1.브라우저 하단 공유하기 버튼을 누른다 2.홈화면에 추가를 누른다"
             />
-            <CustomButton onClick={handleBack} size="md">
+            <CustomButton onClick={onClose} size="md">
               start
             </CustomButton>
           </div>
