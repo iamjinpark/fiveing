@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CustomInput from "@/components/common/CustomInput";
 import CustomButton from "@/components/common/CustomButton";
-import HowToUSeFiveingLikeApp from "@/assets/HowToUSeFiveingLikeApp.png";
+import step2Img from "@/assets/step2Img.png";
 import heart from "@/assets/heart.svg";
 import pb from "@/api/pocketbase.js";
 
@@ -66,7 +66,7 @@ function WelcomeModal({ isOpen, onClose }) {
               use fiveing like an app!
             </div>
             <img
-              src={HowToUSeFiveingLikeApp}
+              src={step2Img}
               alt="파이빙을 홈화면에 추가하는 방법 1.브라우저 하단 공유하기 버튼을 누른다 2.홈화면에 추가를 누른다"
             />
             <CustomButton onClick={onClose} size="md">
