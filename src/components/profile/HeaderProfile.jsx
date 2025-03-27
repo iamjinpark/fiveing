@@ -36,6 +36,16 @@ function HeaderProfile({ image, onImageChange = () => {} }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // 프로필 이미지 불러오기
+  // TODO : 매번 서버 통신 하는 문제를 해결하기
+  useEffect(() => {
+    const user = pb.authStore.model;
+    if (user && user.profileImg) {
+      const url = pb.files.getURL(user, user.profileImg);
+      setImageUrl(url);
+    }
+  }, []);
+
   // 메뉴 클릭 후 드롭다운 닫기
   const handleMenuClick = (callback) => {
     setIsOpen(false);
@@ -43,13 +53,28 @@ function HeaderProfile({ image, onImageChange = () => {} }) {
   };
 
   // 프로필 사진 변경
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
+    if (!file) return;
+
+    try {
+      const formData = new FormData();
+      formData.append("profileImg", file);
+
+      const userId = pb.authStore.model.id;
+
+      const updated = await pb.collection("users").update(userId, formData);
+
+      // 이미지 경로 만들기 (PocketBase 파일 URL 구성)
+      const imageUrl = pb.files.getUrl(updated, updated.profileImg);
+
+      // 부모에 이미지 전달 + 상태 업데이트
       onImageChange(imageUrl);
       setImageUrl(imageUrl);
       setIsOpen(false);
+    } catch (err) {
+      console.error("프로필 이미지 업로드 실패:", err);
+      alert("이미지 업로드 중 문제가 발생했어요.");
     }
   };
 
